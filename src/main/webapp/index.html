@@ -5,10 +5,58 @@
 <body>
 	<script type="text/javascript" src="twitter.js"></script>
 	<div>
-		<a href="api/tweet/test">Click here</a> for a sample response. <br>
-		<br> Enter twitter screen name : <input type="text"
-			name="screenName" id="screenName"> <br> <br> <input
-			type="button" value="Get tweets" id="getTweets" onclick="getTweets()">
+		<br> Enter twitter screen name : 
+		<input type="text" name="screenName" id="screenName"> <br> <br> 
+		<input type="button" value="Get tweets" id="getTweets" onclick="getTweets()">
+		<p>&nbsp;</p>
+
+		<table cellspacing="0" cellpadding="5" border="1">
+			<tr>
+				<td colspan="4">Sample APIs</td>
+			</tr>
+			<tr>
+				<td>Method</td>
+				<td>Description</td>
+				<td>Path</td>
+				<td>Payload (for POST/PUT requests)</td>
+			</tr>
+			<tr>
+				<td>GET</td>
+				<td>List all users</td>
+				<td><a href="api/user/profile/all">/api/user/profile/all</a></td>
+				<td>N/A</td>
+			</tr>
+			<tr>
+				<td>GET</td>
+				<td>Get user profile</td>
+				<td>/api/user/profile?id={userid}</td>
+				<td colspan=""> 
+					<input type="text" name="userid" id="userid" size="10" value="1001"> 
+					<input type="button" value="View profile" id="getProfile" onclick="getProfile()">
+					<input type="button" value="View Address" id="getAddress" onclick="getAddress()">
+				</td>
+			</tr>
+			<tr>
+				<td>POST</td>
+				<td>Add user</td>
+				<td>/api/user</td>
+				<td>
+				{ <br>"id": 1008, <br>"name": "Rajesh", <br>"company": "Oracle Corporation",<br>
+				"address": <br>{ <br>"addressLine1": "100 Oracle Pkwy", <br>"addressLine2": "# 459", <br>
+				"city": "Redwood City", <br>"state": "CA", <br>"zipcode": 94065 <br>} <br>}
+				</td>
+			</tr>
+			<tr>
+				<td>PUT</td>
+				<td>Update user profile</td>
+				<td>/api/user</td>
+				<td>
+				{ <br>"id": 1008, <br>"name": "Rajesh", <br>"company": "Oracle America Inc.",<br>
+				"address": <br>{ <br>"addressLine1": "100 Oracle Pkwy", <br>"addressLine2": "# 459", <br>
+				"city": "Redwood City", <br>"state": "CA", <br>"zipcode": 94065 <br>} <br>}
+				</td>
+			</tr>
+		</table>
 	</div>
 </body>
 </html>
