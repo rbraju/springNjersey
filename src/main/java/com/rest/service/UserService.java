@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,8 +14,8 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -54,8 +55,8 @@ public class UserService {
 	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
-	@Path("/profile")
-	public Response getProfile(@QueryParam("id") int userid) throws Exception {
+	@Path("/{id}/profile")
+	public Response getProfile(@PathParam("id") int userid) throws Exception {
 		User user = getUsers().get(userid);
 		Object entity = (user == null) ? "Invalid userid" : user;
 		int status = (user == null) ? 400 : 200;
@@ -64,8 +65,8 @@ public class UserService {
 
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
-	@Path("/address")
-	public Response getAddress(@QueryParam("id") int userid) throws Exception {
+	@Path("/{id}/address")
+	public Response getAddress(@PathParam("id") int userid) throws Exception {
 		User user = getUsers().get(userid);
 		Object entity = (user == null) ? "Invalid userid" : user.getAddress();
 		int status = (user == null) ? 400 : 200;
@@ -82,7 +83,6 @@ public class UserService {
 			users.put(user.getId(), user);
 
 			File file = ResourceUtils.getFile("classpath:db/users.txt");
-			file.getAbsolutePath();
 			oos = new ObjectOutputStream(new FileOutputStream(file));
 			oos.writeObject(users);
 		} finally {
@@ -124,6 +124,6 @@ public class UserService {
 		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
 		Map<Integer, User> users = (Map<Integer, User>) ois.readObject();
 		ois.close();
-		return users;
+		return (users == null) ? new HashMap<Integer, User>() : users;
 	}
 }
